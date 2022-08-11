@@ -1,0 +1,1 @@
+cmd /k "cd /d D:\DiskANN\x64\Release && build_memory_index.exe  --data_type float --dist_fn l2 --data_path D:\DiskANN\build\data\ann_inputs\ann_inputs_learn.fbin --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_R128_L100_A1.2 -R 128 -L 100 -T 1 --alpha 1.2"
