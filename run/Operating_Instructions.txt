@@ -10,8 +10,8 @@ uint8_to_float.exe D:\DiskANN\build\data\ann_inputs\ann_inputs_query_uint8.fbin 
 2. Static
 
 compute_groundtruth.exe  --data_type float --dist_fn l2 --base_file D:\DiskANN\build\data\ann_inputs\ann_inputs_learn.fbin --query_file  D:\DiskANN\build\data\ann_inputs\ann_inputs_query.fbin --gt_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query_learn_gt100 --K 100
-build_memory_index.exe  --data_type float --dist_fn l2 --data_path D:\DiskANN\build\data\ann_inputs\ann_inputs_learn.fbin --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_R128_L100_A1.2 -R 128 -L 100 -T 1 --alpha 1.2 
-search_memory_index.exe  --data_type float --dist_fn l2 --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_R128_L100_A1.2 --query_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query.fbin  --gt_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query_learn_gt100 -K 10 -L 30 40 50 60 70 80 90 100 200 -T 1 --result_path D:\DiskANN\build\data\ann_inputs\ann_inputs_static_res
+build_memory_index.exe  --data_type float --dist_fn l2 --data_path D:\DiskANN\build\data\ann_inputs\ann_inputs_learn.fbin --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_R128_L50_A1.2 -R 128 -L 50 -T 1 --alpha 1.2 
+search_memory_index.exe  --data_type float --dist_fn l2 --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_R128_L10_A1.2 --query_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query.fbin  --gt_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query_learn_gt100 -K 10 -L 10 20 -T 1 --result_path D:\DiskANN\build\data\ann_inputs\ann_inputs_static_res
 
 3. Streaming
 max_points:        The total size of the dataset, here is set to 1000000
@@ -41,38 +41,4 @@ search_memory_index.exe  --data_type float --dist_fn l2 --query_file  D:\DiskANN
 test_insert_deletes_consolidate.exe --data_type float --dist_fn l2 --data_path D:\DiskANN\build\data\ann_inputs\ann_inputs_learn.fbin --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_dynamic -R 128 -L 100 --alpha 1.2 -T 1 --points_to_skip 0 --max_points 1000000 --insert_percentage 0 --build_percentage 1.0 --delete_percentage 0.3 --do_concurrent false
 compute_groundtruth.exe  --data_type float --dist_fn l2 --base_file  D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_dynamic.after-delete0.300000.data --query_file  D:\DiskANN\build\data\ann_inputs\ann_inputs_query.fbin --gt_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query_learn_dynamic_gt100 --tags_file D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_dynamic.after-delete0.300000.tags --K 100
 search_memory_index.exe  --data_type float --dist_fn l2 --index_path_prefix  D:\DiskANN\build\data\ann_inputs\index_ann_inputs_learn_dynamic.after-delete0.300000 --query_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query.fbin  --gt_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query_learn_dynamic_gt100 -K 10 -L 30 40 50 60 70 80 90 100 200 -T 1 --result_path D:\DiskANN\build\data\ann_inputs\ann_inputs_dynamic_res --dynamic true --tags true
-
-
-
-
-anninputs_0_index_2
-cd D:\DiskANN\x64\Release
-tsv_to_bin.exe uint8 D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_random.tsv D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_learn_uint8.fbin 64 1000000
-uint8_to_float.exe D:\DiskANN\build\data\anninputs_0_index_2_learn_uint8.fbin D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_learn.fbin
-tsv_to_bin.exe uint8 D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2.tsv D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_uint8.fbin 64 10000000
-uint8_to_float.exe D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_uint8.fbin D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin
-
-compute_groundtruth.exe  --data_type float --dist_fn l2 --base_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_learn.fbin --query_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin --gt_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_gt100 --K 100
-build_memory_index.exe  --data_type float --dist_fn l2 --data_path D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_learn.fbin --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_R128_L25_A1.2 -R 128 -L 25 -T 1 --alpha 1.2 
-search_memory_index.exe  --data_type float --dist_fn l2 --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_R128_L25_A1.2 --query_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin  --gt_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_gt100 -K 10 -L 20 50 -T 1 --result_path D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_static_res
-
-
-
-test_insert_deletes_consolidate.exe --data_type float --dist_fn l2 --data_path D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_learn.fbin --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic -R 128 -L 25 --alpha 1.2 -T 1 --points_to_skip 0 --max_points 100000000 --insert_percentage 0.5 --build_percentage 1.0 --delete_percentage 0.5 --do_concurrent false 
-compute_groundtruth.exe  --data_type float --dist_fn l2 --base_file  D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-insert0.500000-delete0.500000.data --query_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin --gt_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_dynamic_gt100 --tags_file D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-insert0.500000-delete0.500000.tags --K 100
-search_memory_index.exe  --data_type float --dist_fn l2 --index_path_prefix  D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-insert0.500000-delete0.500000 --query_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin  --gt_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_dynamic_gt100 -K 10 -L 20 50 -T 1 --result_path D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_dynamic_res --dynamic true --tags true
-
-
-test_insert_deletes_consolidate.exe --data_type float --dist_fn l2 --data_path D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_learn.fbin --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic -R 128 -L 25 --alpha 1.2 -T 1 --points_to_skip 0 --max_points 100000000 --insert_percentage 0.3 --build_percentage 0.7 --delete_percentage 0 --do_concurrent false 
-compute_groundtruth.exe  --data_type float --dist_fn l2 --base_file  D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-insert0.300000.data --query_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin --gt_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_dynamic_gt100 --tags_file D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-insert0.300000.tags --K 100
-search_memory_index.exe  --data_type float --dist_fn l2 --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-insert0.300000 --query_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin  --gt_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_dynamic_gt100 -K 10 -L 20 50 -T 1 --result_path  D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_dynamic_res --dynamic true --tags true
-bingfa
-search_memory_index.exe  --data_type float --dist_fn l2 --query_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin  --gt_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_dynamic_gt100 -K 10 -L 20 50 -T 1 --result_path  D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_dynamic_res --dynamic true --tags true --qps 20
-search_memory_index.exe  --data_type float --dist_fn l2 --query_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin  --gt_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_dynamic_gt100 -K 10 -L 20 50 -T 4 --result_path  D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_dynamic_res --dynamic true --tags true --qps 10
-
-
-test_insert_deletes_consolidate.exe --data_type float --dist_fn l2 --data_path D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_learn.fbin --index_path_prefix D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic -R 128 -L 25 --alpha 1.2 -T 1 --points_to_skip 0 --max_points 100000000 --insert_percentage 0 --build_percentage 1.0 --delete_percentage 0.3 --do_concurrent false
-compute_groundtruth.exe  --data_type float --dist_fn l2 --base_file  D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-delete0.300000.data --query_file  D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin --gt_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_dynamic_gt100 --tags_file D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-delete0.300000.tags --K 100
-search_memory_index.exe  --data_type float --dist_fn l2 --index_path_prefix  D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_learn_dynamic.after-delete0.300000 --query_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query.fbin  --gt_file D:\DiskANN\build\data\ann_inputs\anninputs_0_index_2_query_learn_dynamic_gt100 -K 10 -L 20 50 -T 1 --result_path D:\DiskANN\build\data\ann_inputs\index_anninputs_0_index_2_dynamic_res --dynamic true --tags true
-
 

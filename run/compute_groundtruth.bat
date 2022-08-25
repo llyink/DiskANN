@@ -1,1 +1,0 @@
-cmd /k "cd /d D:\DiskANN\x64\Release && compute_groundtruth.exe --data_type float --dist_fn l2 --base_file D:\DiskANN\build\data\ann_inputs\ann_inputs_learn.fbin --query_file  D:\DiskANN\build\data\ann_inputs\ann_inputs_query.fbin --gt_file D:\DiskANN\build\data\ann_inputs\ann_inputs_query_learn_gt100 --K 100"
