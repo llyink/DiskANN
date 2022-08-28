@@ -213,7 +213,7 @@ int main(int argc, char** argv) {
   std::string           data_type, dist_fn, result_path, query_file, gt_file;
   unsigned              num_threads, K, qps_setting;
   std::vector<unsigned> Lvec;
-  bool                  dynamic, tags;
+  bool                  dynamic, tags, static_tags;
   size_t                max_points;
   float                 insert_percentage, build_percentage, delete_percentage;
 
@@ -249,6 +249,8 @@ int main(int argc, char** argv) {
                        "Whether the index is dynamic. Default false.");
     desc.add_options()("tags", po::value<bool>(&tags)->default_value(false),
                        "Whether to search with tags. Default false.");
+    desc.add_options()("static_tags", po::value<bool>(&static_tags)->default_value(false),
+                       "Whether to streamig. Default false.");
     desc.add_options()("qps_setting,qps",
                        po::value<uint32_t>(&qps_setting)->default_value(1),
                        "qps_setting for qps ");
@@ -364,19 +366,26 @@ int main(int argc, char** argv) {
                 << build_point << " points took " << elapsedSeconds
                 << " seconds (" << build_point / elapsedSeconds
                 << " points/second)\n ";
+      if (static_tags) {
+        std::thread two(search_memory_index<float>, std::ref(metric),
+                        std::ref(index), std::cref(result_path),
+                        std::cref(query_file), std::ref(gt_file), num_threads,
+                        K, std::cref(Lvec), dynamic, true, qps_setting);
+        two.join();
+      } else {
+        std::thread one(insert_till_next_checkpoint<float, TagT>,
+                        std::ref(index), max_points, insert_percentage,
+                        build_percentage, (size_t) num_threads, data,
+                        (size_t) 64, delete_percentage, std::ref(params),
+                        qps_setting);
 
-      std::thread one(insert_till_next_checkpoint<float, TagT>, std::ref(index),
-                      max_points, insert_percentage, build_percentage,
-                      (size_t) num_threads, data, (size_t) 64,
-                      delete_percentage, std::ref(params), qps_setting);
-
-      std::thread two(search_memory_index<float>, std::ref(metric),
-                      std::ref(index), std::cref(result_path),
-                      std::cref(query_file), std::ref(gt_file), num_threads, K,
-                      std::cref(Lvec), dynamic, true, qps_setting);
-      one.join();
-      two.join();
-
+        std::thread two(search_memory_index<float>, std::ref(metric),
+                        std::ref(index), std::cref(result_path),
+                        std::cref(query_file), std::ref(gt_file), num_threads,
+                        K, std::cref(Lvec), dynamic, true, qps_setting);
+        one.join();
+        two.join();
+      }
     } else {
       std::cout << "Unsupported type. Use float/int8/uint8" << std::endl;
       return -1;
